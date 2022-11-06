@@ -6,9 +6,6 @@ from django.contrib.auth import login,logout,authenticate
 
 # Create your views here.
 
-def index(request):
-    return render(request, 'index.html')
-
 def registration(request):
     if request.user.is_authenticated:
         return HttpResponse("<h1>You are Authenticated!!!</h1>")
