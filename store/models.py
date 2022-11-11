@@ -37,3 +37,11 @@ class Product(models.Model):
         ordering = ['-created',]
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
+
+class ProductImages(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.FileField(_("Gallery Image"), upload_to='product_gallery/')
+    created = models.DateTimeField(_("Uploding time"), auto_now_add=True)
+
+    def __str__(self) -> str:
+        return str(self.product.name)
