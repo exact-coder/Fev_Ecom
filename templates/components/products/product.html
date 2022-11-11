@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="{{prod.get_product_url}}">{{prod.name}}</a>
+                    <a class="h6 text-decoration-none text-truncate" href="productDetails/{{prod.slug}}">{{prod.name}}</a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
                         <h5>${{prod.price}}</h5>
                         {% if prod.old_price %}
