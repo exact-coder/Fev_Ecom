@@ -1,6 +1,6 @@
 from django import template
 from store.models import Category
-
+from order.models import Cart,Order
 register = template.Library()
 
 
@@ -11,3 +11,11 @@ def category(user):
     return cate
     # else:
         # return f"You are not register user"
+
+@register.filter
+def cart_count(user):
+    order = Order.objects.filter(user=user, ordered=False)
+    if order.exists():
+        return order[0].orderitems.count()
+    else:
+        return 0

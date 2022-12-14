@@ -30,9 +30,17 @@ class Order(models.Model):
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
     paymentId = models.CharField(_("Payment Id"), max_length=300,blank=True,null=True)
     orderdId = models.CharField(_("Ordered Id"), max_length=300,blank=True,null=True)
+    
+    def get_totals_shipping(self):
+        totals = 30 
+        for order_item in self.orderitems.all():
+            totals += float(order_item.get_total())
+        return totals
 
     def get_totals(self):
         total  =0 
         for order_item in self.orderitems.all():
             total += float(order_item.get_total())
-            return total
+        return total
+
+    
