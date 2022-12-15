@@ -38,7 +38,8 @@
                         <tr>
                             <td class="align-middle"><img src="{{cart_product.item.image.url}}" alt="{{cart_product.item.name}}" style="width: 50px;"> {{cart_product.item.name}}</td>
                             <td class="align-middle">${{cart_product.item.price}}</td>
-                            <td class="align-middle">
+                            <td class="align-middle">{{cart_product.quantity}}</td>
+                            {% comment %} <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-primary btn-minus" >
@@ -52,7 +53,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </td>
+                            </td> {% endcomment %}
                             <td class="align-middle">${{cart_product.get_total}}</td>
                             <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
                         </tr>
@@ -86,7 +87,7 @@
                         {% endif %}
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$30.0</h6>
+                            <h6 class="font-weight-medium">$5.0</h6>
                         </div>
                     </div>
                     <div class="pt-2">

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category,Product,ProductImages
+from .models import Category,Product,ProductImages,VariationValue
 
 # Register your models here.
 
@@ -19,3 +19,8 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImagesAdmin]
 
 admin.site.register(Product,ProductAdmin)
+
+class VariationValueAdmin(admin.ModelAdmin):
+    list_display = ['id','name','product','price']
+    list_display_links = ['id','name']
+admin.site.register(VariationValue,VariationValueAdmin)

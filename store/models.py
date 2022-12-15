@@ -45,3 +45,26 @@ class ProductImages(models.Model):
 
     def __str__(self) -> str:
         return str(self.product.name)
+
+class VariationManager(models.Manager):
+    def sizes(self):
+        return super(VariationManager, self).filter(variation="size")
+    def colors(self):
+        return super(VariationManager, self).filter(variation="color")
+
+VARIATIONS_TYPE = (
+    ('size', 'size'),
+    ('color', 'color'),
+)
+
+class VariationValue(models.Model):
+    variation = models.CharField(_("Variation Type"), max_length=100, choices=VARIATIONS_TYPE)
+    name = models.CharField(_("Variation Name"), max_length=100)
+    product = models.ForeignKey(Product, verbose_name=_("product"), on_delete=models.CASCADE)
+    price = models.IntegerField(_("Variation Product Size"),blank=True,null=True)
+    created = models.DateTimeField(_(""), auto_now=False, auto_now_add=True)
+
+    objects = VariationManager()
+
+    def __str__(self) -> str:
+        return self.name

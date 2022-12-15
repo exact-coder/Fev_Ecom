@@ -10,6 +10,8 @@ class Cart(models.Model):
     user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE, related_name='cart')
     item = models.ForeignKey(Product, verbose_name=_("Product item"), on_delete=models.CASCADE)
     quantity = models.IntegerField(_("Quanftity of Product"), default=1)
+    size = models.CharField(_("Product Size"), max_length=100,blank=True,null=True)
+    color = models.CharField(_("Product Color"), max_length=100,blank=True,null=True)
     purchased = models.BooleanField(_("Purchased or Not"))
     created = models.DateTimeField(_("Adding Time"), auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(_("Update Time"), auto_now=True, auto_now_add=False)
@@ -32,7 +34,7 @@ class Order(models.Model):
     orderdId = models.CharField(_("Ordered Id"), max_length=300,blank=True,null=True)
     
     def get_totals_shipping(self):
-        totals = 30 
+        totals = 5 
         for order_item in self.orderitems.all():
             totals += float(order_item.get_total())
         return totals
