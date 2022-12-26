@@ -1,3 +1,43 @@
 .cart_hover {
-  display: none;
+  width: 18rem;
+  text-align: center;
+}
+.prod_img {
+  height: 60px;
+  width: 70px;
+}
+.xmark_icon {
+  height: 17px;
+  width: 15px;
+  cursor: pointer;
+}
+.cart_hover_list_item_left {
+  text-align: left;
+  margin-top: 0.2rem;
+}
+.cart_hover_list_item_right {
+  text-align: right;
+  margin-top: 0.6rem;
+}
+.cart_tot {
+  padding-top: 0.9rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.bt-btn {
+  margin: 0rem 0.7rem;
+  background-color: #3d464d;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+}
+.bt-btn:hover {
+  color: #ffc800;
+  background-color: #fff;
+}
+.custom_truncate {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

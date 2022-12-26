@@ -1,5 +1,6 @@
 {% load static %}
 {% load category %}
+{% load cart_product %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -159,26 +160,49 @@
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
-                            <a href="{% url 'cartview' %}" class="btn px-0 ml-3">
+                            {% comment %} <a href="{% url 'cartview' %}" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <div class="cart_hover">
-                                    <div class="cart_hover_list_item">
-                                        <div class="cart_hover_list_item_left">
-                                            <h5 class="item_title">produuct title</h5>
-                                            <p class="contity_price">5 x $30</p>
-                                        </div>
-                                        <div class="cart_hover_list_item_right">
-                                            <img src="" alt="image" class="item_image">
-                                            <i class="fas fa-solid fa-xmark"></i>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 {% if request.user.is_authenticated %}
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{request.user|cart_count}}</span>
                                 {% else %}
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                                 {% endif %}
+                            </a> {% endcomment %}
+                            <a  class="btn px-0 ml-3 dropdown-toggle" data-toggle="dropdown">
+                                <i class="fas fa-shopping-cart text-primary"></i>
+                                {% if request.user.is_authenticated %}
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{request.user|cart_count}}</span>
+                                
+                                {% else %}
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                {% endif %}
                             </a>
+                            {% if request.user.is_authenticated  %}
+
+                            <div class="cart_hover border dropdown-menu dropdown-menu-right bg-primary">
+                                {% for cart_product in request.user|cart_view %}
+                                <div class="cart_hover_list_item dropdown-item">
+                                    <div class="row">
+                                        <div class="cart_hover_list_item_left col-6">
+                                            <p class="item_title custom_truncate">{{cart_product.item.name}}</p>
+                                            <p class="contity_price">{{cart_product.quantity}} x ${{cart_product.item.price}}</p>
+                                        </div>
+                                        <div class="cart_hover_list_item_right col-6">
+                                            <img class="prod_img" src="{{cart_product.item.image.url}}" alt="image" class="item_image">
+                                            <img class="xmark_icon" src="{% static 'img/xmark-solid.svg' %}" alt="x">
+                                        </div>
+                                    </div><hr>
+                                </div>
+                                {% endfor %}
+                                <div class="row cart_tot">
+                                    <h6 class="col-6">Total : </h6>
+                                    <h6 class="col-6">${{request.user|cart_total_shipping}}</h6>
+                                </div>
+                                <a href="{% url 'cartview' %}" class="btn border bt-btn">View Cart</a>
+                                <a href="" class="btn border bt-btn">Checkout</a>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </nav>
@@ -282,6 +306,7 @@
 
     <!-- Template Javascript -->
     <script src= "{% static 'js/main.js' %}"></script>
+    <script src= "{% static 'js/custom.js' %}"></script>
 </body>
 
 </html>
