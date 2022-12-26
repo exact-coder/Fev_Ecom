@@ -23,6 +23,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -160,7 +161,18 @@
                             </a>
                             <a href="{% url 'cartview' %}" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-
+                                <div class="cart_hover">
+                                    <div class="cart_hover_list_item">
+                                        <div class="cart_hover_list_item_left">
+                                            <h5 class="item_title">produuct title</h5>
+                                            <p class="contity_price">5 x $30</p>
+                                        </div>
+                                        <div class="cart_hover_list_item_right">
+                                            <img src="" alt="image" class="item_image">
+                                            <i class="fas fa-solid fa-xmark"></i>
+                                        </div>
+                                    </div>
+                                </div>
                                 {% if request.user.is_authenticated %}
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{request.user|cart_count}}</span>
                                 {% else %}
