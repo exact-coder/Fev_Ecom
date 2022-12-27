@@ -49,3 +49,51 @@ def cart_view(request):
         return render(request, 'store/cart.html',context)
     else:
         return ValueError("You Haven't an Active Cart !!")
+
+def remove_item_from_cart(request,pk):
+    item = get_object_or_404(Product,pk=pk)
+    orders = Order.objects.filter(user=request.user, ordered=False)
+    if orders.exists():
+        order = orders[0]
+        if order.orderitems.filter(item=item).exists():
+            order_item = Cart.objects.filter(item=item, user = request.user, purchased=False)[0]
+            order.orderitems.remove(order_item)
+            order_item.delete()
+            return redirect('cartview')
+    else:
+        return ValueError("Unable to Delete!!")
+
+def increase_cart(request,pk):
+    item = get_object_or_404(Product,pk =pk)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.orderitems.filter(item=item).exists():
+            order_item = Cart.objects.filter(item=item,user=request.user, purchased=False)[0]
+            if order_item.quantity >= 1:
+                order_item.quantity += 1
+                order_item.save()
+                return redirect('cartview')
+            else:
+                return redirect('cartview')
+        else:
+            return redirect('cartview')
+
+def decrease_cart(request,pk):
+    item = get_object_or_404(Product,pk =pk)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.orderitems.filter(item=item).exists():
+            order_item = Cart.objects.filter(item=item,user=request.user, purchased=False)[0]
+            if order_item.quantity > 1:
+                order_item.quantity -= 1
+                order_item.save()
+                return redirect('cartview')
+            else:
+                order.orderitems.remove(order_item)
+                order_item.delete()
+                return redirect('cartview')
+        else:
+            return redirect('cartview')
+

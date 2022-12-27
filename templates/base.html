@@ -189,10 +189,11 @@
                                         </div>
                                         <div class="cart_hover_list_item_right col-6">
                                             <img class="prod_img" src="{{cart_product.item.image.url}}" alt="image" class="item_image">
-                                            <img class="xmark_icon" src="{% static 'img/xmark-solid.svg' %}" alt="x">
+                                            <a class="btn" href="{% url 'removeitem' pk=cart_product.item.pk %}"><img class="xmark_icon" src="{% static 'img/xmark-solid.svg' %}" alt="x"></a>
                                         </div>
                                     </div><hr>
                                 </div>
+
                                 {% endfor %}
                                 <div class="row cart_tot">
                                     <h6 class="col-6">Total : </h6>

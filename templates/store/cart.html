@@ -38,28 +38,30 @@
                         {% if request.user.is_authenticated %}
                         {% for cart_product in carts %}
                         <tr>
-                            <td class="align-middle"><img src="{{cart_product.item.image.url}}" alt="{{cart_product.item.name}}" style="width: 50px;">{{cart_product.item.name}}</td>
+                            <td class="align-middle">
+                                <img src="{{cart_product.item.image.url}}" alt="{{cart_product.item.name}}" style="width: 50px;">
+                                <a style="text-decoration: none;" href="/productDetails/{{cart_product.item.slug}}">{{cart_product.item.name}}</a></td>
+                            
                             <td class="align-middle">${{cart_product.item.price}}</td>
                             <td class="align-middle">{{cart_product.color}}</td>
                             <td class="align-middle">{{cart_product.size}}</td>
-                            <td class="align-middle">{{cart_product.quantity}}</td>
-                            {% comment %} <td class="align-middle">
+                            <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
+                                        <a href="{% url 'decrease-quantity' pk=cart_product.item.pk  %}" class="btn btn-sm btn-primary btn-minus" >
                                         <i class="fa fa-minus"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                     <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{cart_product.quantity}}">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
+                                        <a href="{% url 'increase-quantity' pk=cart_product.item.pk  %}" class="btn btn-sm btn-primary btn-plus">
                                             <i class="fa fa-plus"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
-                            </td> {% endcomment %}
+                            </td>
                             <td class="align-middle">${{cart_product.get_total}}</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                            <td class="align-middle"><a href="{% url 'removeitem' pk=cart_product.item.pk %}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
                         </tr>
                         {% endfor %}
                         {% endif %}
