@@ -179,7 +179,6 @@
                                 {% endif %}
                             </a>
                             {% if request.user.is_authenticated  %}
-
                             <div class="cart_hover border dropdown-menu dropdown-menu-right bg-primary">
                                 {% for cart_product in request.user|cart_view %}
                                 <div class="cart_hover_list_item dropdown-item">

@@ -18,9 +18,6 @@ class ProductDetailView(DetailView):
         context['product_photos'] = ProductImages.objects.filter(product=self.object.id)
         return context
 
-def cartView(request):
-    return render(request, 'store/cart.html')
-
 """#For function based productdetails page
 def productDetails(request,slug):
     item = Product.objects.get(id=slug)

@@ -58,7 +58,7 @@
                         <strong class="text-dark mr-3">Sizes:</strong>
                         {% for prodDescSizes in prodDetails.variationvalue_set.sizes %}
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-{{prodDescSizes.id}}" name="size" value={{prodDescSizes.name}}>
+                                <input Required type="radio" class="custom-control-input" id="size-{{prodDescSizes.id}}" name="size" value={{prodDescSizes.name}}>
                                 <label class="custom-control-label" for="size-{{prodDescSizes.id}}">{{prodDescSizes.name}}</label>
                             </div>
                         {% endfor %}
@@ -70,7 +70,7 @@
                         <strong class="text-dark mr-3">Colors:</strong>
                         {% for prodDescColors in prodDetails.variationvalue_set.colors %}
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-{{prodDescColors.id}}" name="color" value={{prodDescColors.name}} >
+                            <input Required type="radio" class="custom-control-input" id="color-{{prodDescColors.id}}" name="color" value={{prodDescColors.name}} >
                             <label class="custom-control-label" for="color-{{prodDescColors.id}}">{{prodDescColors.name}}</label>
                         </div>
                     {% endfor %}

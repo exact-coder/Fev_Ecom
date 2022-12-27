@@ -36,4 +36,16 @@ def add_to_cart(request, pk):
         order.save()
         order.orderitems.add(order_item[0])
         return redirect("HomePage")
-        
+
+def cart_view(request):
+    carts = Cart.objects.filter(user=request.user, purchased=False)
+    orders = Order.objects.filter(user=request.user, ordered=False)
+    if carts.exists() and orders.exists():
+        order = orders[0]
+        context = {
+            'carts': carts,
+            'order': order
+        }
+        return render(request, 'store/cart.html',context)
+    else:
+        return ValueError("You Haven't an Active Cart !!")

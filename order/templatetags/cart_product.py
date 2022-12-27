@@ -12,6 +12,7 @@ def cart_view(user):
     else:
         return ValueError("You Haven't an Active Cart !!")
 
+
 @register.filter
 def cart_total(user):
     order = Order.objects.filter(user=user, ordered=False)

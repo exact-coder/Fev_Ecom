@@ -27,6 +27,8 @@
                         <tr>
                             <th>Products</th>
                             <th>Price</th>
+                            <th>Color</th>
+                            <th>Size</th>
                             <th>Quantity</th>
                             <th>Total</th>
                             <th>Remove</th>
@@ -34,10 +36,12 @@
                     </thead>
                     <tbody class="align-middle">
                         {% if request.user.is_authenticated %}
-                        {% for cart_product in request.user|cart_view %}
+                        {% for cart_product in carts %}
                         <tr>
-                            <td class="align-middle"><img src="{{cart_product.item.image.url}}" alt="{{cart_product.item.name}}" style="width: 50px;"> {{cart_product.item.name}}</td>
+                            <td class="align-middle"><img src="{{cart_product.item.image.url}}" alt="{{cart_product.item.name}}" style="width: 50px;">{{cart_product.item.name}}</td>
                             <td class="align-middle">${{cart_product.item.price}}</td>
+                            <td class="align-middle">{{cart_product.color}}</td>
+                            <td class="align-middle">{{cart_product.size}}</td>
                             <td class="align-middle">{{cart_product.quantity}}</td>
                             {% comment %} <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -93,6 +97,7 @@
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
+                            {% comment %} <h5>${{order.get_totals}}</</h5> {% endcomment %}
                             <h5>${{request.user|cart_total_shipping}}</</h5>
                         </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
