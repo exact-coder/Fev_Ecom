@@ -122,6 +122,11 @@
                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                                 {% for subcategory in cat.children.all %}
                                 <a href="" class="dropdown-item">{{subcategory.name}}</a>
+                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                    {% for subsubcategory in subcategory.children.all %}
+                                    <a href="" class="dropdown-item">{{subsubcategory.name}}</a>
+                                    {% endfor %}
+                                </div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -185,7 +190,11 @@
                                     <div class="row">
                                         <div class="cart_hover_list_item_left col-6">
                                             <p class="item_title custom_truncate">{{cart_product.item.name}}</p>
-                                            <p class="contity_price">{{cart_product.quantity}} x ${{cart_product.item.price}}</p>
+                                            <p class="contity_price">{{cart_product.quantity}} x $ {% if cart_product.variation_single_price %}
+                                                {{cart_product.variation_single_price}}
+                                                {% else %}
+                                                {{cart_product.item.price}}
+                                                {% endif %}</p>
                                         </div>
                                         <div class="cart_hover_list_item_right col-6">
                                             <img class="prod_img" src="{{cart_product.item.image.url}}" alt="image" class="item_image">

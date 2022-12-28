@@ -42,7 +42,11 @@
                                 <img src="{{cart_product.item.image.url}}" alt="{{cart_product.item.name}}" style="width: 50px;">
                                 <a style="text-decoration: none;" href="/productDetails/{{cart_product.item.slug}}">{{cart_product.item.name}}</a></td>
                             
-                            <td class="align-middle">${{cart_product.item.price}}</td>
+                            <td class="align-middle">${% if cart_product.variation_single_price %}
+                                {{cart_product.variation_single_price}}
+                                {% else %}
+                                {{cart_product.item.price}}
+                                {% endif %}</td>
                             <td class="align-middle">{{cart_product.color}}</td>
                             <td class="align-middle">{{cart_product.size}}</td>
                             <td class="align-middle">
@@ -60,7 +64,15 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle">${{cart_product.get_total}}</td>
+                            
+                            <td class="align-middle">$ {% if cart_product.variation_total %}
+                                {{cart_product.variation_total}}
+                                {% else %}
+                                {{cart_product.get_total}}
+                                {% endif %}
+                            </td>
+
+
                             <td class="align-middle"><a href="{% url 'removeitem' pk=cart_product.item.pk %}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
                         </tr>
                         {% endfor %}

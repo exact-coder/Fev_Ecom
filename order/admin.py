@@ -9,8 +9,8 @@ class CartAdmin(admin.ModelAdmin):
 
 admin.site.register(Cart,CartAdmin)
 
-# class OrderAdmin(admin.ModelAdmin):
-#     list_display = ["id","user","orderitems"]
-#     list_display_links = ["id",]
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ["id","user"]
+    list_display_links = ["id",]
 
-admin.site.register(Order)
+admin.site.register(Order,OrderAdmin)

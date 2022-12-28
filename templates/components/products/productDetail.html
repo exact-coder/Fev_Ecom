@@ -53,29 +53,39 @@
                     
                 <form action="{% url 'addToCart' pk=prodDetails.pk %}" method="post">
                     {% csrf_token %}
-                    {% if prodDetails.variationvalue_set.sizes %}
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
+                    {% if prodDetails.variationvalue_set.sizes %}
                         {% for prodDescSizes in prodDetails.variationvalue_set.sizes %}
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input Required type="radio" class="custom-control-input" id="size-{{prodDescSizes.id}}" name="size" value={{prodDescSizes.name}}>
                                 <label class="custom-control-label" for="size-{{prodDescSizes.id}}">{{prodDescSizes.name}}</label>
                             </div>
                         {% endfor %}
+                        {% else %}
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input Required type="radio" class="custom-control-input" id="size-0" name="size" value= "Small">
+                            <label class="custom-control-label" for="size-0">Small</label>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
 
-                    {% if prodDetails.variationvalue_set.colors %}
                     <div class="d-flex mb-4">
                         <strong class="text-dark mr-3">Colors:</strong>
+                    {% if prodDetails.variationvalue_set.colors %}
                         {% for prodDescColors in prodDetails.variationvalue_set.colors %}
                         <div class="custom-control custom-radio custom-control-inline">
                             <input Required type="radio" class="custom-control-input" id="color-{{prodDescColors.id}}" name="color" value={{prodDescColors.name}} >
                             <label class="custom-control-label" for="color-{{prodDescColors.id}}">{{prodDescColors.name}}</label>
                         </div>
                     {% endfor %}
+                    {% else %}
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input Required type="radio" class="custom-control-input" id="color-0" name="color" value="White" >
+                        <label class="custom-control-label" for="color-0">White</label>
                     </div>
                     {% endif %}
+                </div>
 
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
