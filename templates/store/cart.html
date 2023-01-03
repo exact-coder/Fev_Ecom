@@ -81,11 +81,12 @@
                 </table>
             </div>
             <div class="col-lg-4">
-                <form class="mb-30" action="">
+                <form class="mb-30" action="" method="POST">
+                    {% csrf_token %}
                     <div class="input-group">
-                        <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
+                        {{ coupon_form }}
                         <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
+                            <button type="submit" class="btn btn-primary">Apply Coupon</button>
                         </div>
                     </div>
                 </form>
@@ -95,12 +96,24 @@
                         {% if request.user.is_authenticated %}
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
-                            <h6>${{request.user|cart_total}}</h6>
+                            <h6>$
+                                {% if total_price_after_discount %}
+                                {{ total_price_after_discount }}
+                                {% else %}
+                                {{request.user|cart_total}}
+                                {% endif %}
+                                </</h6>
                         </div>
                         {% else %}
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
-                            <h6>${{request.user|cart_total}}</</h6>
+                            <h6>$
+                                {% if total_price_after_discount %}
+                                {{ total_price_after_discount }}
+                                {% else %}
+                                {{request.user|cart_total}}
+                                {% endif %}
+                                </</h6>
                         </div>
                         {% endif %}
                         <div class="d-flex justify-content-between">
@@ -112,8 +125,13 @@
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
                             {% comment %} <h5>${{order.get_totals}}</</h5> {% endcomment %}
-                            <h5>${{request.user|cart_total_shipping}}</</h5>
-                        </div>
+                            <h5>$
+                                {% if discount_total_with_shipping %}
+                                {{ discount_total_with_shipping }}
+                                {% else %}
+                                {{request.user|cart_total_shipping}}
+                                {% endif %}</</h5>
+                            </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                     </div>
                 </div>
