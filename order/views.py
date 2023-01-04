@@ -52,7 +52,7 @@ def cart_view(request):
             current_time = timezone.now()
             code = coupon_form.cleaned_data.get('code')
             if code:
-                coupon_obj = Coupon.objects.get(code=code)
+                coupon_obj = Coupon.objects.get(code=code,active=True)
                 print('coupon_obj: ',coupon_obj)
                 if coupon_obj.valid_to >= current_time :
                     get_discount = (coupon_obj.discount /100) * order.get_totals()
