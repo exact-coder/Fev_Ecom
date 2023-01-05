@@ -7,9 +7,10 @@ from django_countries.fields import CountryField
 class BillingAddress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     first_name = models.CharField(_("First Name"), max_length=50,null=True,blank=True)
-    last_name = models.CharField(_("First Name"), max_length=50,null=True,blank=True)
+    last_name = models.CharField(_("Last Name"), max_length=50,null=True,blank=True)
     country = CountryField()
-    address = models.TextField(_("Address"))
+    address1 = models.TextField(_("Address1"),null=True,blank=True)
+    address2 = models.TextField(_("Address2"),null=True,blank=True)
     city = models.CharField(_("City"),max_length=50,null=True,blank=True)
     zipcode =models.CharField(_("Zip Code"), max_length=50,null=True,blank=True)
     phone_number = models.CharField(_("Phone Number"), max_length=16)

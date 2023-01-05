@@ -4,7 +4,7 @@ from payment.models import BillingAddress
 # Register your models here.
 
 class BillingAddressAdmin(admin.ModelAdmin):
-    list_display = ['id','first_name','phone_number','country','city','address']
+    list_display = ['id','first_name','phone_number','country','city','address1','address2']
     list_display_links = ['id','first_name','phone_number']
     list_filter =['phone_number','country']
 
