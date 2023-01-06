@@ -1,6 +1,7 @@
 from django.db.models import fields
 from payment.models import BillingAddress
 from django import forms
+from order.models import Order
 
 class BillingAddressForm(forms.ModelForm):
     class Meta:
@@ -16,4 +17,14 @@ class BillingAddressForm(forms.ModelForm):
             'address2': forms.Textarea(attrs={'class':'form-control','placeholder':'Danmondi,Rode-1,Lane-1'}),
             'zipcode': forms.TextInput(attrs={'class':'form-control','placeholder':'246'}),
             'phone_number': forms.TextInput(attrs={'class':'form-control','placeholder':'0173758778'}),
+        }
+
+
+class PaymentMethodForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['payment_method',]
+        labels = {'payment_method':'Select Payment Method',}
+        widgets={
+            'payment_method': forms.Select(attrs={'class':'custom-select'})
         }

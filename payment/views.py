@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 
 from payment.models import BillingAddress
-from payment.forms import BillingAddressForm
+from payment.forms import BillingAddressForm,PaymentMethodForm
 from order.models import Cart,Order
 
 # Create your views here.
@@ -12,6 +12,7 @@ class CheckoutTempleteView(TemplateView):
         saved_address = BillingAddress.objects.get_or_create(user=request.user or None)
         saved_address = saved_address[0]
         form = BillingAddressForm(instance=saved_address)
+        payment_method = PaymentMethodForm()
 
         order_qs = Order.objects.filter(user=request.user, ordered=False)
         order_item = order_qs[0].orderitems.all()
@@ -22,6 +23,7 @@ class CheckoutTempleteView(TemplateView):
             'order_item':order_item,
             'order_total': order_total,
             'order_total_shipping':order_total_shipping,
+            'payment_method':payment_method,
         }
 
         return render(request, 'store/checkout.html',context)
