@@ -1,5 +1,5 @@
 from django import template
-
+from django.shortcuts import render,redirect
 from order.models import Cart,Order
 
 register = template.Library()
@@ -10,7 +10,7 @@ def cart_view(user):
     if cart.exists():
         return cart
     else:
-        return ValueError("You Haven't an Active Cart !!")
+        return redirect("HomePage")
 
 
 @register.filter

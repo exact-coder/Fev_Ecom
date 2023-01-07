@@ -198,7 +198,9 @@
                                         </div>
                                         <div class="cart_hover_list_item_right col-6">
                                             <img class="prod_img" src="{{cart_product.item.image.url}}" alt="image" class="item_image">
+                                            {% if cart_product.item.pk %}
                                             <a class="btn" href="{% url 'removeitem' pk=cart_product.item.pk %}"><img class="xmark_icon" src="{% static 'img/xmark-solid.svg' %}" alt="x"></a>
+                                            {% endif %}
                                         </div>
                                     </div><hr>
                                 </div>
