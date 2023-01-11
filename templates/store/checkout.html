@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %} Checkout || Fev-Ecom {% endblock title %}
 {% load static %}
  {% block body %}
     <!-- Checkout Start -->
@@ -95,7 +96,7 @@
                         <h6 class="mb-3">Products</h6>
                         {% for item in order_item %}
                         <div class="d-flex justify-content-between">
-                            <a href="" onMouseOver="this.style.text-decoration=none!important">{{item.item.name}}</a>
+                            <a href="/productDetails/{{item.item.slug}}" onMouseOver="this.style.text-decoration=none!important">{{item.item.name}}</a>
                             <p>$
                                 {% if item.variation_total %}
                                 {{ item.variation_total }}
