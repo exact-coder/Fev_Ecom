@@ -1,12 +1,19 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Category,Product,ProductImages
+from .models import Category,Product,ProductImages,Banner
 
 # Create your views here.
 class HomeListView(ListView):
     model = Product
     template_name = 'index.html'
     context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        banners = Banner.objects.filter(is_active=True).order_by('-id')[0:4]
+        context['banners'] = banners
+        context['active_banner'] = len(banners)
+        return context
 
 class ProductDetailView(DetailView):
     model = Product
