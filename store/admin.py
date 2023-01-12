@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category,Product,ProductImages,VariationValue,Banner
+from .models import Category,Product,ProductImages,VariationValue,Banner,Logo,Favicon
 
 # Register your models here.
 
@@ -30,3 +30,6 @@ class BannerAdmin(admin.ModelAdmin):
     list_display = ['id','title','is_active','short_desc']
     list_display_links = ['id','title']
 admin.site.register(Banner,BannerAdmin)
+
+admin.site.register(Logo)
+admin.site.register(Favicon)

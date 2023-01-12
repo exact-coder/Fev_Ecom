@@ -1,6 +1,7 @@
 {% load static %}
 {% load category %}
 {% load cart_product %}
+{% load logoInfo %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
-    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+    <link href="{{request.user|favicon}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -80,8 +81,13 @@
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="{% url 'HomePage' %}" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                    {% if request.user|logo %}
+                    <img src="{{request.user|logo}}" alt="logo" height="50px" weight="55px">
+                    {% else %}
+
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">Fev</span>
+                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Ecom</span>
+                    {% endif %}
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">

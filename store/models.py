@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
 from autoslug import AutoSlugField
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
@@ -82,3 +83,26 @@ class Banner(models.Model):
             return self.title
         else:
             return self.product.name
+
+
+User = get_user_model()
+
+
+class Logo(models.Model):
+    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE)
+    image = models.ImageField(_("Logo"), upload_to="logo/")
+    is_active = models.BooleanField(_("Active Logo"),default=False)
+    created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return str(self.image)
+
+class Favicon(models.Model):
+    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE)
+    image = models.ImageField(_("Favicon"), upload_to="logo/")
+    is_active = models.BooleanField(_("Active Favicon"),default=False)
+    created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return str(self.image)
+
