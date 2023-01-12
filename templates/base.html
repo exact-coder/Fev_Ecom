@@ -90,18 +90,24 @@
                     {% endif %}
                 </a>
             </div>
+
+
             <div class="col-lg-4 col-6 text-left">
-                <form action="">
+                <form action="" method="post">
+                    {% csrf_token %}
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input type="text" class="form-control" name="search_product" placeholder="Search for products">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
+                                <button style="border:none; margin:0px;padding:0px;overflow:hidden;border-radius:8px;" type='submit'><i class="fa fa-search"></i></button>
                             </span>
                         </div>
                     </div>
                 </form>
             </div>
+
+
+
             <div class="col-lg-4 col-6 text-right">
                 <p class="m-0">Customer Service</p>
                 <h5 class="m-0">+012 345 6789</h5>
@@ -146,8 +152,8 @@
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                     <a href="{% url 'HomePage' %}" class="text-decoration-none d-block d-lg-none">
-                        <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                        <span class="h1 text-uppercase text-dark bg-light px-2">Fev</span>
+                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Ecom</span>
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>

@@ -1,19 +1,31 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView,TemplateView
 from .models import Category,Product,ProductImages,Banner
 
 # Create your views here.
-class HomeListView(ListView):
-    model = Product
-    template_name = 'index.html'
-    context_object_name = 'products'
+class HomeListView(TemplateView):
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get(self,request,**kwargs):
+        products = Product.objects.all().order_by('-id')
         banners = Banner.objects.filter(is_active=True).order_by('-id')[0:4]
-        context['banners'] = banners
-        context['active_banner'] = len(banners)
-        return context
+
+        context={
+            'products':products,
+            'banners': banners,
+            'active_banner': len(banners),
+        }
+        return render(request, 'index.html',context)
+
+
+    def post(self,request, **kwargs):
+        if request.method == 'post' or request.method =='POST':
+            search_product = request.POST.get('search_product')
+            products = Product.objects.filter(name__icontains=search_product).order_by('-id')
+
+            context = {
+                'products': products
+            }
+            return render(request, 'index.html',context)
 
 class ProductDetailView(DetailView):
     model = Product
