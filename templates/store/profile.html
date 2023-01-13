@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}PROFILE || FEV-ECOM{% endblock title %}
+{% block body %}
+
+
+<section class="order_section col-lg-12">
+        <!-- Cart Start -->
+        <div class="container-fluid">
+            <div class="row px-xl-5">
+                <h1 style='text-align:center;margin: 2rem 1rem 2rem 1rem;height:fit-content;width: 100%;'>Previous Orders</h1>
+                <div class="col-lg-12 table-responsive mb-5">
+                    <table class="table table-light table-borderless table-hover text-center mb-0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Products Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Payment ID</th>
+                                <th>Ordered ID</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle">
+                            {% for order in orders %}
+                            <tr>
+                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">{{order.id}} </td>
+                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Product Name</td>
+                                <td class="align-middle">$150</td>
+                                <td class="align-middle"> 3 </td>
+                                <td class="align-middle">{{order.paymentId}}</td>
+                                <td class="align-middle">{{order.orderdId}}</td>
+                                <td class="align-middle"><button class="btn btn-sm btn-success"><i class="fa fa-edit"></i></button></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Cart End -->
+</section>
+
+{% endblock body %}
+
+
+

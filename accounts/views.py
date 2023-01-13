@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from .forms import RegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
+from django.views.generic import TemplateView
+from order.models import Cart,Order
+from payment.models import BillingAddress
+from accounts.models import Profile
 
 # Create your views here.
 
@@ -37,3 +41,17 @@ def CustomerLogin(request):
             else:
                 return HttpResponse('Something happening Wrong for login!!')
     return render(request, 'login.html')
+
+# Customers Profile
+
+class ProfileView(TemplateView):
+    def get(self,request,*args, **kwargs):
+        orders = Order.objects.filter(user=request.user, ordered=True)
+
+        context = {
+            'orders' : orders
+        }
+        return render(request, 'store/profile.html',context)
+
+    def post(self,request,*args, **kwargs):
+        pass
