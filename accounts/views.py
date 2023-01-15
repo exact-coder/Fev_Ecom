@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import RegistrationForm
 from django.contrib.auth.decorators import login_required
@@ -6,6 +6,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.views.generic import TemplateView
 from order.models import Cart,Order
 from payment.models import BillingAddress
+from payment.forms import BillingAddressForm
 from accounts.models import Profile
 
 # Create your views here.
@@ -48,10 +49,19 @@ class ProfileView(TemplateView):
     def get(self,request,*args, **kwargs):
         orders = Order.objects.filter(user=request.user, ordered=True)
 
+        billingaddress = BillingAddress.objects.get(user=request.user)
+        billingaddress_form = BillingAddressForm(instance=billingaddress)
+
         context = {
-            'orders' : orders
+            'orders' : orders,
+            'billingaddress' :billingaddress_form,
         }
         return render(request, 'store/profile.html',context)
 
     def post(self,request,*args, **kwargs):
-        pass
+        if request.method == 'post' or request.method == 'POST':
+            billingaddress = BillingAddress.objects.get(user=request.user)
+            billingaddress_form = BillingAddressForm(request.POST,instance=billingaddress)
+        if billingaddress_form.is_valid():
+            billingaddress_form.save()
+            return redirect('profile')
