@@ -3,9 +3,36 @@
 {% block title %}PROFILE || FEV-ECOM{% endblock title %}
 {% block body %}
 
+<section class="profile_view">
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-12">
+                <h1 style='text-align:center;margin: 2rem 1rem 2rem 1rem;height:fit-content;width: 100%;border-bottom: 2px solid #3d464d;'>Your Profile</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                <div class="bg-light p-30 mb-5">
+                            <div class="row">
+
+                            {% for profileform in profileForm %}
+                            <div class="form-group col-md-6">
+                                <p style="margin-bottom:6px;font-size:14px;font-weight:normal;">{{profileform.label_tag}}</p>
+                {{profileform}} <small class="text-danger">{{profileform.errors |striptags}}</small>
+                                
+                                </div>
+                            {% endfor %}
+                            <button style="display:inline-block !important; margin:auto" type="submit" class="btn btn-block btn-primary font-weight-bold py-3 col-md-2 col-md-3 col-xs-12"> Save Profile </button>
+                    </div>
+                    
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 
 <section class="order_section col-lg-12">
-        <!-- Cart Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
             <h1 style='text-align:center;margin: 2rem 1rem 2rem 1rem;height:fit-content;width: 100%;border-bottom: 2px solid #3d464d;'>Previous Orders</h1>
@@ -43,7 +70,6 @@
                 </div>
             </div>
         </div>
-        <!-- Cart End -->
 </section>
 
 <section class="billing_address">

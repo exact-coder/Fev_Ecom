@@ -10,7 +10,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
-    <link href="{{request.user|favicon}}" rel="icon">
+    {% if request|favicon %}
+    <link href="{{request|favicon}}" rel="icon">
+    {% endif %}
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -45,9 +47,12 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div class="dropdown-menu dropdown-menu-right">
+                            {% if user.is_authenticated %}
+                            <a class="dropdown-item btn" href="{% url 'profile' %}">Profile</a>
+                            {% else %}
                             <button class="dropdown-item" type="button">Sign in</button>
                             <button class="dropdown-item" type="button">Sign up</button>
-                            <a class="dropdown-item btn" href="{% url 'profile' %}">Profile</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="btn-group mx-2">
@@ -82,8 +87,8 @@
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="{% url 'HomePage' %}" class="text-decoration-none">
-                    {% if request.user|logo %}
-                    <img src="{{request.user|logo}}" alt="logo" height="50px" weight="55px">
+                    {% if request|logo %}
+                    <img src="{{request|logo}}" alt="logo" height="50px" weight="55px">
                     {% else %}
 
                     <span class="h1 text-uppercase text-primary bg-dark px-2">Fev</span>
