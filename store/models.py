@@ -3,13 +3,14 @@ from django.utils.translation import gettext_lazy as _
 from ckeditor.fields import RichTextField
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
+User = get_user_model
 
 # Create your models here.
 
 class Category(models.Model):
     name = models.CharField(_("Category Name"), max_length=150,blank=False, null=False)
     image = models.ImageField(_("Category Logo"), upload_to="category/",blank=True, null=True)
-    parent = models.ForeignKey("self",related_name='children',on_delete=models.CASCADE,blank=True,null=True,verbose_name=_("children"))
+    parent = models.ForeignKey('self',related_name='children',on_delete=models.CASCADE,blank=True,null=True)
     created = models.DateTimeField(_("Creation date"), auto_now_add=True)
 
     def __str__(self) -> str:
@@ -86,7 +87,6 @@ class Banner(models.Model):
 
 
 User = get_user_model()
-
 
 class Logo(models.Model):
     user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE)

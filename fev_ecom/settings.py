@@ -49,6 +49,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'fev_ecom.urls'
+AUTH_USER_MODEL = 'accounts.User'
 
 TEMPLATES = [
     {

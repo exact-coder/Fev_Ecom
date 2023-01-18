@@ -1,14 +1,19 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
 from django.utils.translation import gettext_lazy as _
 
 from store.models import Product,VariationValue
 
+
+
 # Create your models here.
 
+User = get_user_model()
+
 class Cart(models.Model):
-    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE, related_name='cart')
-    item = models.ForeignKey(Product, verbose_name=_("Product item"), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name=_("cart"), on_delete=models.CASCADE,null=True,blank=True)
+    item = models.ForeignKey(Product, related_name=_("ProductItem"), on_delete=models.CASCADE)
     quantity = models.IntegerField(_("Quanftity of Product"), default=1)
     size = models.CharField(_("Product Size"), max_length=100,blank=True,null=True)
     color = models.CharField(_("Product Color"), max_length=100,blank=True,null=True)
@@ -70,7 +75,7 @@ class Order(models.Model):
         ('PayPal','PayPal'),
         ('SSLcommerz','SSLcommerz'),
     )
-    user = models.ForeignKey(User, verbose_name=_("User Name"), on_delete=models.CASCADE)
+    user = models.ForeignKey(User,verbose_name=_("User Name"), on_delete=models.CASCADE,null=True,blank=True)
     orderitems = models.ManyToManyField(Cart, verbose_name=_("Ordered Products"))
     ordered = models.BooleanField(_("Ordered"), default=False)
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
