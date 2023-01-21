@@ -20,7 +20,14 @@ class Category(models.Model):
         ordering = ['-created',]
         verbose_name_plural = 'Categories'
 
+PRODUCT_VARIATION_TYPE = (
+    ('Most View Products','Most View Products'),
+    ('Recent Products','Recent Products'),
+    ('Featured Products','Featured Products'),
+)
+
 class Product(models.Model):
+    product_variatin = models.CharField(_("Product Variation"), max_length=100,choices=PRODUCT_VARIATION_TYPE,null=True,blank=True)
     name = models.CharField(_("Product Name"), max_length=150)
     category = models.ForeignKey(Category, verbose_name=_("category"),related_name='category', on_delete=models.CASCADE)
     preview_des = models.CharField(_("Short Description"), max_length=500,blank=True,null=True)
@@ -84,6 +91,17 @@ class Banner(models.Model):
             return self.title
         else:
             return self.product.name
+
+class Offer(models.Model):
+    product = models.ForeignKey(Product, verbose_name=_("offer"), on_delete=models.CASCADE)
+    title = models.CharField(_("Offer Title"), max_length=25)
+    background = models.ImageField(_("Background Image"), upload_to='banner')
+    discount = models.CharField(_("Discount"), max_length=15)
+    is_active = models.BooleanField(_("Active"),default=False)
+
+    def __str__(self) -> str:
+        return self.title
+
 
 
 User = get_user_model()

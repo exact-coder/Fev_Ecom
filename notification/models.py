@@ -13,7 +13,7 @@ class UserObj(models.Model):
     created = models.DateTimeField(_("Created"), auto_now=False, auto_now_add=True)
 
     def __str__(self) -> str:
-        return f"{self.user.email} notification"
+        return f"{self.user} notification"
 
     @receiver(post_save, sender=User)
     def create_notification_object(sender,instance,created ,**kwargs):

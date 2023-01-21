@@ -1,18 +1,26 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView,TemplateView
-from .models import Category,Product,ProductImages,Banner
+from .models import Category,Product,ProductImages,Banner,Offer
 
 # Create your views here.
 class HomeListView(TemplateView):
 
     def get(self,request,**kwargs):
         products = Product.objects.all().order_by('-id')
+        featured_products = Product.objects.filter(product_variatin='Featured Products').order_by('-id')[0:8]
+        recent_products = Product.objects.filter(product_variatin='Recent Products').order_by('-id')[0:8]
+        most_view_products = Product.objects.filter(product_variatin='Most View Products').order_by('-id')[0:8]
         banners = Banner.objects.filter(is_active=True).order_by('-id')[0:4]
+        offers = Offer.objects.filter(is_active=True).order_by('-id')[0:2]
 
         context={
             'products':products,
+            'featured_products': featured_products,
+            'recent_products': recent_products,
+            'most_view_products': most_view_products,
             'banners': banners,
             'active_banner': len(banners),
+            'offers':offers,
         }
         return render(request, 'index.html',context)
 
@@ -26,6 +34,13 @@ class HomeListView(TemplateView):
                 'products': products
             }
             return render(request, 'index.html',context)
+
+def allProduct(request):
+    products = Product.objects.all().order_by('-id')
+    context ={
+        'products':products,
+    }
+    return render(request,'components/products/allProduct.html',context)
 
 class ProductDetailView(DetailView):
     model = Product
