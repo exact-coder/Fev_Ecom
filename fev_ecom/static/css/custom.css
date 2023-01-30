@@ -42,6 +42,126 @@
   text-overflow: ellipsis;
 }
 
-/* Sidebar Start */
+/* Registration Form Start */
 
-/* Sidebar End */
+.reg {
+  color: #fff;
+  display: flex;
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
+  /* background: -webkit-linear-gradient(to right, #ffc800, #F2994A);
+  background: linear-gradient(to right, #ffc800, #F2994A); */
+
+  padding: 10px;
+}
+.reg_container {
+  max-width: 700px;
+  width: 100%;
+  padding: 25px;
+  border-radius: 25px;
+
+  /* background: -webkit-linear-gradient(to left, #ffc800, #f2994a);
+  background: linear-gradient(to left, #ffc800, #f2994a); */
+  background-color: #ffd333;
+}
+
+.reg_container .reg_heading {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+  text-align: center;
+  padding: 0 0 20px 0;
+}
+
+.reg_container .reg_heading::before {
+  content: "";
+  position: absolute;
+  height: 3px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* background: -webkit-linear-gradient(to left, #71b7e6, #9b5b);
+  background: linear-gradient(to left, #71b7e6, #9b5); */
+  background: -webkit-linear-gradient(to right, #ffc800, #f2994a);
+  background: linear-gradient(to right, #ffc800, #f2994a);
+}
+
+.reg_container form .reg_cart_details {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+form .reg_cart_details .reg_card-box {
+  width: calc(100% / 2 - 20px);
+  margin-bottom: 15px;
+}
+form .reg_cart_details .reg_card_log {
+  width: 100% !important;
+  margin-bottom: 15px;
+}
+
+.reg_cart_details .reg_card-box .reg_details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.reg_cart_details .reg_card-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.reg_cart_details .reg_card-box input:focus,
+.reg_cart_details .reg_card-box input:valid {
+  border-color: #9b59b6;
+}
+
+form .reg_button {
+  text-align: center;
+}
+
+form .reg_button input {
+  padding: 10px 0;
+  margin-top: 10px;
+  height: 100%;
+  width: 50%;
+  outline: none;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  background: -webkit-linear-gradient(to right, #ffc800, #f2994a);
+  background: linear-gradient(to right, #ffc800, #f2994a);
+}
+
+form .reg_button input:hover {
+  background: -webkit-linear-gradient(to left, #ffc800, #f2994a);
+  background: linear-gradient(to left, #ffc800, #f2994a);
+}
+
+@media (max-width: 700px) {
+  .reg_container {
+    max-width: 100%;
+  }
+  form .reg_cart_details .reg_card-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .reg_container form .reg_cart_details {
+    max-height: 300px;
+    overflow: scroll;
+  }
+}
+
+/* Registration Form End */

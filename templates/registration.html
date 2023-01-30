@@ -1,4 +1,56 @@
-<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="container reg">
+        <div class="row">
+            <div class="reg_container">
+                <div class="reg_heading">
+                  Register Youself
+                </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                  <div class="reg_cart_details">
+                    <div class="reg_card-box">
+                      <span class="reg_details">Full Name</span>
+                      <input type="text" name="fullname" placeholder="Enter Your name" required>
+                    </div>
+                    <div class="reg_card-box">
+                      <span class="reg_details">User Name</span>
+                      <input type="text" name="username" placeholder="Enter Username" required>
+                    </div>
+                    <div class="reg_card-box">
+                      <span class="reg_details">Email</span>
+                      <input type="email" name="email" placeholder="Enter Your Email" required>
+                    </div>
+                    <div class="reg_card-box">
+                      <span class="reg_details">Phone Number</span>
+                      <input type="phone" name="phone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="reg_card-box">
+                      <span class="reg_details">Password</span>
+                      <input type="password" name="password1" placeholder="Enter Your Password" required>
+                    </div>
+                    <div class="reg_card-box">
+                      <span class="reg_details">Confirm Password</span>
+                      <input type="password" name="password2" placeholder="Confirm Password" required>
+                    </div>
+                  </div>
+                  <div class="reg_button">
+                    <input type="submit" name="" value="Register">
+                  </div>
+                </form>
+              </div>
+        </div>
+    </div>
+{% endblock body %}
+
+
+
+
+
+
+{% comment %} <!DOCTYPE html>
 {% load crispy_forms_tags %}
 <html lang="en">
 <head>
@@ -16,4 +68,5 @@
         <input type="submit" value="Create An Account">
     </form>
 </body>
-</html>
+</html> {% endcomment %}
+

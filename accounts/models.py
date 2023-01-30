@@ -14,6 +14,8 @@ class CustomManager(BaseUserManager):
     def create_user(self, email,user_name,password, **extra_fields):
         if not email:
             raise ValueError("Valid Email Must be Given")
+        extra_fields.setdefault('is_active',True)
+        extra_fields.setdefault('is_verify',True)
         email = self.normalize_email(email)
         user = self.model(email=email, user_name=user_name, **extra_fields)
         user.set_password(password)
@@ -65,6 +67,7 @@ class User(AbstractBaseUser,PermissionsMixin):
 class Profile(models.Model):
     user = models.OneToOneField(User, verbose_name=_("Profile"),related_name="profile", on_delete=models.CASCADE)
     full_name = models.CharField(_("Full Name"), max_length=150,null=True,blank=True)
+    username = models.CharField(_("User Name"), max_length=150,null=True,blank=True)
     address=models.TextField(_("Adderss"),null=True,blank=True)
     country = CountryField()
     city = models.CharField(_("City Name"), max_length=150,null=True,blank=True)

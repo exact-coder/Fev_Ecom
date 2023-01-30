@@ -8,29 +8,40 @@ from payment.models import BillingAddress
 from payment.forms import BillingAddressForm
 from accounts.models import Profile
 from accounts.forms import ProfileForm,RegistrationForm
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 # Create your views here.
+
 
 def registration(request):
     if request.user.is_authenticated:
-        return HttpResponse("<h1>You are Authenticated!!!</h1>")
+        return redirect('HomePage')
     else:
-        form = RegistrationForm()
         if request.method == 'post' or request.method == 'POST':
-            form = RegistrationForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return HttpResponse('Your Account has been created successfully!!!')
+            fullname = request.POST.get('fullname')
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            password1 = request.POST.get('password1')
+            password2 = request.POST.get('password2')
+            if password1 == password2:
+                register = User.objects.create_user(user_name=username,email =email,password =password1)
+                register.save()
+                return redirect('login')
 
-    context = {
-        'form': form,
-    }
-    return render(request, 'registration.html',context)
+    return render(request, 'registration.html')        
+
+@login_required
+def LogoutPage(request):
+    logout(request)
+    return redirect('login')
+
 
 
 def CustomerLogin(request):
     if request.user.is_authenticated:
-        return HttpResponse('<h1>You are Already LogedIn!!</h1>')
+        return redirect('HomePage')
     else:
         if request.method == 'POST' or request.method == 'post':
             username = request.POST.get('username')
@@ -38,9 +49,9 @@ def CustomerLogin(request):
             customer = authenticate(request, username=username,password=password)
             if customer is not None:
                 login(request, customer)
-                return HttpResponse("You are logged in Successfully!!")
+                return redirect('HomePage')
             else:
-                return HttpResponse('Something happening Wrong for login!!')
+                return redirect('login')
     return render(request, 'login.html')
 
 # Customers Profile

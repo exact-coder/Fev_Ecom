@@ -7,9 +7,9 @@ class HomeListView(TemplateView):
 
     def get(self,request,**kwargs):
         products = Product.objects.all().order_by('-id')
-        featured_products = Product.objects.filter(product_variatin='Featured Products').order_by('-id')[0:8]
-        recent_products = Product.objects.filter(product_variatin='Recent Products').order_by('-id')[0:8]
-        most_view_products = Product.objects.filter(product_variatin='Most View Products').order_by('-id')[0:8]
+        featured_products = Product.objects.filter(product_variatin='Featured Products').order_by('-id')[0:16]
+        recent_products = Product.objects.filter(product_variatin='Recent Products').order_by('-id')[0:16]
+        most_view_products = Product.objects.filter(product_variatin='Most View Products').order_by('-id')[0:16]
         banners = Banner.objects.filter(is_active=True).order_by('-id')[0:4]
         offers = Offer.objects.filter(is_active=True).order_by('-id')[0:2]
 
@@ -41,6 +41,9 @@ def allProduct(request):
         'products':products,
     }
     return render(request,'components/products/allProduct.html',context)
+
+def contract(request):
+    return render(request,'store/contact.html')
 
 class ProductDetailView(DetailView):
     model = Product

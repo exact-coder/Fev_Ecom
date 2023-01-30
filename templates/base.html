@@ -49,9 +49,10 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             {% if user.is_authenticated %}
                             <a class="dropdown-item btn" href="{% url 'profile' %}">Profile</a>
+                            <a class="dropdown-item btn" href="{% url 'logout' %}">Log Out</a>
                             {% else %}
-                            <button class="dropdown-item" type="button">Sign in</button>
-                            <button class="dropdown-item" type="button">Sign up</button>
+                            <a class="dropdown-item btn" href="{% url 'login' %}">Sign In</a>
+                            <a class="dropdown-item btn" href="{% url 'registration' %}">Sign Up</a>
                             {% endif %}
                         </div>
                     </div>
@@ -168,7 +169,7 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{% url 'HomePage' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'allProduct' %}" class="nav-item nav-link">Shop</a>
-                            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
+                            {% comment %} <a href="detail.html" class="nav-item nav-link">Shop Detail</a> {% endcomment %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
@@ -176,7 +177,7 @@
                                     <a href="{% url 'checkout' %}" class="dropdown-item">Checkout</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="{% url 'contract' %}" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
@@ -339,3 +340,4 @@
 </body>
 
 </html>
+

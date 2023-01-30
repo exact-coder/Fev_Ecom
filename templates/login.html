@@ -1,4 +1,36 @@
-<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} AllInOne || LogIn Page{% endblock title %}
+{% block body %}
+    <div class="container reg">
+        <div class="row">
+            <div class="reg_container">
+                <div class="reg_heading">
+                  Sign In Youself
+                </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                  <div class="reg_cart_details">
+                    <div class="reg_card-box reg_card_log">
+                      <span class="reg_details">User Name</span>
+                      <input type="text" name="username" placeholder="Enter Username">
+                    </div>
+                    <div class="reg_card-box reg_card_log">
+                      <span class="reg_details">Password</span>
+                      <input type="password" name="password" placeholder="Enter Your Password">
+                    </div>
+                  </div>
+                  <div class="reg_button">
+                    <input type="submit" value="Sign In">
+                  </div>
+                </form>
+              </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,4 +47,4 @@
         <input type="submit" value="Log In">
     </form>
 </body>
-</html>
+</html> {% endcomment %}
