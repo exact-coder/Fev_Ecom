@@ -53,9 +53,10 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_photos'] = ProductImages.objects.filter(product=self.object.id)
+        print('context===========',context)
         return context
 
-"""#For function based productdetails page
+""" #For function based productdetails page
 def productDetails(request,slug):
     item = Product.objects.get(id=slug)
     photos = ProductImages.objects.filter(product = item).order_by('created')
@@ -63,4 +64,4 @@ def productDetails(request,slug):
         'singleproduct': item,
         'photos': photos,
     }
-    return render(request, 'components/products/productDetail.html', context)"""
+    return render(request, 'components/products/productDetail.html', context) """
