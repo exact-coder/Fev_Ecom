@@ -65,3 +65,6 @@ def productDetails(request,slug):
         'photos': photos,
     }
     return render(request, 'components/products/productDetail.html', context) """
+
+def snackBar(request):
+    return render(request,"components/snackBar.html")
