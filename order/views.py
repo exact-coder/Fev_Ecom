@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from store.models import Product
 from order.models import Cart, Order
+from notification.notific import SendNotification
 
 from coupon.models import Coupon
 from coupon.forms import CouponCodeForm
@@ -34,11 +35,15 @@ def add_to_cart(request, pk):
                 order_item[0].size = size
                 order_item[0].color = color
                 order.orderitems.add(order_item[0])
+                message = f"Added new Product in your Cart"
+                SendNotification(request.user, message)
                 return redirect("HomePage")
         else:
             order = Order(user=request.user)
             order.save()
             order.orderitems.add(order_item[0])
+            message = f"Added new Product in your Cart"
+            SendNotification(request.user, message)
             return redirect("HomePage")
     else:
         return redirect('login')

@@ -6,7 +6,9 @@ from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
-# Create your models here.
+#####################################################
+################## Create your models ###############
+#####################################################
 
 class UserObj(models.Model):
     user = models.OneToOneField(User, related_name=_("userobj"), on_delete=models.CASCADE)
