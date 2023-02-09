@@ -41,6 +41,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.custom_truncate_noti {
+  width: 230px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /* Registration Form Start */
 

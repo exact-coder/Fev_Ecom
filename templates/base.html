@@ -2,6 +2,7 @@
 {% load category %}
 {% load cart_product %}
 {% load logoInfo %}
+{% load notification %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -179,6 +180,25 @@
                             </div>
                             <a href="{% url 'contract' %}" class="nav-item nav-link">Contact</a>
                         </div>
+                        <!---Notification Start -->
+                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block mr-3" style="display: flex !important;">
+                            <a  class="btn px-0 ml-3 mr-3 dropdown-toggle" data-toggle="dropdown">
+                                <i class="fas fa-bell text-primary"></i>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">5</span>
+                            </a>
+                            <div class="cart_hover border dropdown-menu dropdown-menu-right bg-primary">
+                                <div class="cart_hover_list_item dropdown-item">
+                                    <div class="row">
+                                        <div class=" cart_hover_list_item_left col-6">
+                                            {% for notification in request.user|notifications %}
+                                            <p class=" custom_truncate_noti item_title ">{{notification.message}}</p><hr>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        
+                        <!---Notification End -->
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
@@ -234,6 +254,7 @@
                             </div>
                             {% endif %}
                         </div>
+                        
                     </div>
                 </nav>
             </div>
@@ -254,9 +275,9 @@
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                 <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
                 <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Boropul, Halisahahor, Chattogram, BD</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>hassanakash799@gmail.com</p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>01793745514</p>
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="row">
