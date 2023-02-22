@@ -183,16 +183,40 @@
                         <!---Notification Start -->
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block mr-3" style="display: flex !important;">
                             <a  class="btn px-0 ml-3 mr-3 dropdown-toggle" data-toggle="dropdown">
+                                {% if request.user|notification_count %}
                                 <i class="fas fa-bell text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">5</span>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{request.user|notification_count}}</span>
+                                {% else %}
+                                <i class="fas fa-bell text-primary"></i>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                {% endif %}
                             </a>
-                            <div class="cart_hover border dropdown-menu dropdown-menu-right bg-primary">
-                                <div class="cart_hover_list_item dropdown-item">
+                            <div class="border dropdown-menu dropdown-menu-right bg-primary">
+                                <div class="dropdown-item">
                                     <div class="row">
-                                        <div class=" cart_hover_list_item_left col-6">
+                                        <div class=" cart_hover">
+                                            <p style="background-color:#3d464d;color:#fff;font-size:10px;padding:2px;" >Unreaded Notification</p>
+                                            {% if request.user|notifications %}
                                             {% for notification in request.user|notifications %}
-                                            <p class=" custom_truncate_noti item_title ">{{notification.message}}</p><hr>
+                                            <div class="container">
+                                                <a class="is_read_style" href="#"><p class="col-10 cart_hover_list_item custom_truncate_noti item_title ">{{notification.message}}</p></a>
+                                            <a class="btn col-1" href="{% url 'is_read' notification.pk %}"><img class="xmark_icon" src="{% static 'img/xmark-solid.svg' %}" alt="x"></a>
+                                            <hr>
+                                            </div>
                                             {% endfor %}
+                                            {% endif %}
+                                            <p style="background-color:#3d464d;color:#fff;font-size:12px;padding:2px;">Readed Notification</p>
+                                            {% if request.user|read_notifications %}
+                                            {% for read_notification in request.user|read_notifications %}
+                                            <div class="container">
+                                               <a class="is_read_style" href="#">
+                                                <p class="col-10 custom_truncate_noti item_title ">{{read_notification.message}}</p>
+                                               </a>
+                                            <a class="btn col-1" href="{% url 'is_read' read_notification.pk %}"><img class="xmark_icon" src="{% static 'img/xmark-solid.svg' %}" alt="x"></a>
+                                            <hr>
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

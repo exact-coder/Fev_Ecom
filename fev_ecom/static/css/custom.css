@@ -48,6 +48,17 @@
   text-overflow: ellipsis;
 }
 
+.is_read_style{
+  color: #3d464d !important;
+}
+.is_read_style:hover{
+  cursor: pointer;
+  color: #FFD333 !important;
+  direction: none !important;
+  text-decoration: none !important;
+
+}
+
 /* Registration Form Start */
 
 .reg {
